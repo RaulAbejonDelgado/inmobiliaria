@@ -1,0 +1,119 @@
+<!-- todas {{todasCasas}} - alquilados {{casasAlquiladasSenal}} - venta : {{casasVentasSenal}} -->
+<div class="botonSelectDiv">
+    <button (click)="alquiler()" class="badge badge-primary botonSelect">Alquiler</button>
+    <button (click)="venta()" class="badge badge-secondary botonSelect">Venta</button>
+    <button (click)="todas()" class="badge badge-success botonSelect">Todas</button>
+</div>
+
+<div class="row" width="100%;" >
+  
+  <!--Listados Todas las casas-->
+  <div class="col-2"  [hidden]="!todasCasas">
+    <ul>
+      <li class="list-group-item"  *ngFor="let casa of casas; let i = index;" (click)="selecionarCasa(casa)">{{casa.nombre}}</li>
+    </ul>
+  </div>
+  <!--Listados Todas las casas Alquildas-->
+  <div class="col-2"  [hidden]="!casasAlquiladasSenal">
+    <ul>
+      <li class="list-group-item"  *ngFor="let casa of casasAlquiladas; let i = index;" (click)="selecionarCasa(casa)">{{casa.nombre}}</li>
+    </ul>
+  </div>
+  <!--Listados Todas las casas venta-->
+  <div class="col-2"  [hidden]="!casasVentasSenal">
+    <ul>
+      <li class="list-group-item"  *ngFor="let casa of casasVenta; let i = index;" (click)="selecionarCasa(casa)">{{casa.nombre}}</li>
+    </ul>
+  </div>
+  <!-- cards Todas-->
+
+  <div [hidden]="vistaDetalle" class="col-8" >
+    <div [hidden]="!todasCasas">
+      <div class="tarjetas">
+        <div class="card" style="width: 18rem;" *ngFor="let casa of casas; let i = index;">
+          <img class="card-img-top" src="{{casa.foto}}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{casa.nombre}}</h5>
+            <p class="card-text"><b>Direccion: </b>{{casa.nombre}}</p>
+            <p class="card-text"><b>precio: </b>{{casa.precio | currency:'EUR'}}</p>
+            <p class="card-text"><b>Alquier: </b>{{casa.alquiler == false ? 'No':'Si'}}</p>
+            <p class="card-text"><b>Nº habitaciones: </b>{{casa.habitaciones}}</p>
+            <p>Servicios:</p>
+            <ul>
+              <li *ngFor="let servicio of casa.servicios; ">{{servicio.nombre}} - {{servicio.disponible == true ?
+                'Si':'No'}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div [hidden]="!casasAlquiladasSenal">
+        <div class="tarjetas">
+          <div class="card" style="width: 18rem;" *ngFor="let casa of casasAlquiladas; let i = index;">
+            <img class="card-img-top" src="{{casa.foto}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{casa.nombre}}</h5>
+              <p class="card-text"><b>Direccion: </b>{{casa.nombre}}</p>
+              <p class="card-text"><b>precio: </b>{{casa.precio | currency:'EUR'}}</p>
+              <p class="card-text"><b>Alquier: </b>{{casa.alquiler == false ? 'No':'Si'}}</p>
+              <p class="card-text"><b>Nº habitaciones: </b>{{casa.habitaciones}}</p>
+              <p>Servicios:</p>
+              <ul>
+                <li *ngFor="let servicio of casa.servicios; ">{{servicio.nombre}} - {{servicio.disponible == true ?
+                  'Si':'No'}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div [hidden]="!casasVentasSenal">
+        <div class="tarjetas">
+          <div class="card" style="width: 18rem;" *ngFor="let casa of casasVenta; let i = index;">
+            
+            <img class="card-img-top" src="{{casa.foto}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{casa.nombre}}</h5>
+              <p class="card-text"><b>Direccion: </b>{{casa.nombre}}</p>
+              <p class="card-text"><b>precio: </b>{{casa.precio | currency:'EUR'}}</p>
+              <p class="card-text"><b>Alquier: </b>{{casa.alquiler == false ? 'No':'Si'}}</p>
+              <p class="card-text"><b>Nº habitaciones: </b>{{casa.habitaciones}}</p>
+              <p>Servicios:</p>
+             
+              <ul>
+                <li *ngFor="let servicio of casa.servicios; ">{{servicio.nombre}} - {{servicio.disponible == true ?
+                  'Si':'No'}}</li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+
+
+  <!--Listado busqueda-->
+  <div [hidden]="!vistaDetalle" class="col-8" >
+    <hr>
+    <div class="tarjetas">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{casaSelecionada.foto}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{casaSelecionada.nombre}}</h5>
+          <p class="card-text"><b>Direccion: </b>{{casaSelecionada.nombre}}</p>
+          <p class="card-text"><b>precio: </b>{{casaSelecionada.precio | currency:'EUR'}}</p>
+          <p class="card-text"><b>Alquier: </b>{{casaSelecionada.alquiler == false ? 'No':'Si'}}</p>
+          <p class="card-text"><b>Nº habitaciones: </b>{{casaSelecionada.habitaciones}}</p>
+          <p>Servicios:</p>
+          <ul>
+            <li *ngFor="let servicio of casaSelecionada.servicios; ">{{servicio.nombre}} - {{servicio.disponible ==
+              true ? 'Si':'No'}}</li>
+          </ul>
+          <a href="#"  (click)="cerrarDetalle()" class="btn btn-primary">Cerrar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

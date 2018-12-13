@@ -1,0 +1,95 @@
+
+<div class="row justify-content-md-center" [hidden]="formularioNuevo">
+
+    
+    <form [formGroup]="formulario" (ngSubmit)="crearCasa()" novalidate >
+      <p>{{mensaje}}</p>
+      {{formulario.status}}
+      <div class="form-row justify-content-md-center">
+        <div class="form-group">
+          <label for="nombre"> Nombre:</label>
+          <input type="text" formControlName="nombre" class="form-control" name="nombre" placeholder="Nombre para la casa">
+
+          <small *ngIf="formulario.controls.nombre.valid"  class="text-success"><b>Correcto</b></small>
+          <small *ngIf="formulario.controls.nombre.errors?.required" class="text-danger">El campos es requerido</small>
+          <small *ngIf="formulario.controls.nombre.errors?.minlength" class="text-danger">El nombre debe tener mas de 2
+            caracteres</small>
+          <small *ngIf="formulario.controls.nombre.errors?.maxlength" class="text-danger">El nombre debe tener menos de
+            45 caracteres</small>
+          </div>
+        <div class="form-group">
+            <label for="direccion"> Direccion:</label>
+            <input type="text" formControlName="direccion" class="form-control" name="direccion" placeholder="Calle">
+  
+            <small *ngIf="formulario.controls.direccion.valid" class="text-success"><b>Correcto</b></small>
+          <small *ngIf="formulario.controls.direccion.errors?.required" class="text-danger">El campos es requerido</small>
+          <small *ngIf="formulario.controls.direccion.errors?.minlength" class="text-danger">El nombre debe tener mas de 2
+            caracteres</small>
+          <small *ngIf="formulario.controls.direccion.errors?.maxlength" class="text-danger">El nombre debe tener menos de
+            45 caracteres</small>
+          </div>
+         
+      </div>
+      <div class="form-row justify-content-md-center">
+  
+        <div class="form-group">
+          <label for="alquiler">Alquiler</label>
+          <input type="checkbox" formControlName="alquiler" class="form-control" name="alquiler" >
+  
+        </div>
+        
+  
+      </div>
+      <div class="form-row justify-content-md-center">
+          <div class="form-group">
+              <label for="precio">Precio</label>
+              <input type="number" formControlName="precio" class="form-control" name="precio" >
+              <small *ngIf="formulario.controls.precio.valid" class="text-success"><b>Correcto</b></small>
+              <small *ngIf="formulario.controls.precio.errors?.required" class="text-danger">El campos es requerido</small>
+          </div>
+          <div class="form-group">
+              <label for="descuento">habitaciones</label>
+              <input type="number" formControlName="habitaciones" class="form-control" name="habitaciones">
+              <small *ngIf="formulario.controls.habitaciones.valid" class="text-success"><b>Correcto</b></small>
+              <small *ngIf="formulario.controls.habitaciones.errors?.required" class="text-danger">El campos es requerido</small>
+            </div>
+      </div>
+     
+      <div class="form-row justify-content-md-center">
+  
+        <div class="form-group">
+          <div class="form-group">
+            <label for="imagen">foto</label>
+            <input type="text" formControlName="foto" class="form-control" name="foto" placeholder="formato jpg, png">
+          </div>
+        </div>
+
+         <div class="form-group">
+          <a class="btn btn-success" (click)="agregarServicio()">Nuevo Servicio</a>
+          <!-- <button class="btn btn-danger" (click)="eliminarColor(i)">Eliminar color</button> -->
+          <div formArrayName="servicios">
+            <div *ngFor="let servicio of formulario.get('servicios').controls; let i = index;">
+              <div [formGroupName]="i">
+                <button (click)="eliminarServicio(i)">Eliminar Servicio  {{i}} </button>
+               
+                <label for="servicio">Nombre servicio</label>
+                <input type="text" formControlName="servicio" class="form-control" name="servicio">
+                <label for="disponible">Disponible</label>
+                <input type="checkbox" formControlName="disponible" class="form-control" name="disponible">
+              </div>
+            </div>
+          </div>
+        </div>
+
+  
+      </div>
+      <div class="form-row justify-content-md-center">
+          <div class="form-group">
+              <input type="submit" class="btn btn-info" value="crear" [disabled]="formulario.status === 'INVALID'">
+          </div>
+  
+      </div>
+  
+  
+    </form>
+  </div>
